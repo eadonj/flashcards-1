@@ -4,12 +4,20 @@ class Deck
   
   attr_reader :cards
   def initialize
-    @cards = # array: text import method 
+    @cards = import
     
   end
 
   def import
-    
+    @lines = []
+    File.new("flashcard_samples.txt").each_slice(3) do |slice| 
+      @lines << slice.map! {|element| element.chomp}
+    end
+    puts @lines.inspect
+end
+flashcards = []
+import
+@lines.each {|arr| flashcards << Card.new({:defintion => arr[0], :answer => arr[1]})}
   end
 
   def check_guess(guess)
@@ -25,8 +33,8 @@ class Card
     @definition = args.fetch(:defintion){raise "need card"}
     @answer = args.fetch(:answer){raise "need answer"}
   end
+
 end
 
-
-array = [["Designates code that must be run unconditionally at the beginning of the program before any other.", "BEGIN"],
-        ["Gives an unconditional termination to a code block, and is usually placed with an argument.", "break"]]
+a = Deck.new
+a.import
