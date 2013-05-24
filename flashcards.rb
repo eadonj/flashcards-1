@@ -1,11 +1,9 @@
-
-
 class Deck
   
   attr_reader :cards
   def initialize
-    @cards = import
-    
+    @cards = []
+    import
   end
 
   def import
@@ -14,10 +12,13 @@ class Deck
       @cards << Card.new({:defintion => arr[0], :answer => arr[1]})
   end
 
-  def check_guess(guess)
-    
+  def select_definition
+    @cards.sample
   end
 
+  def check_guess(definition, answer)
+    @cards.find {|card| card.answer == answer && card.definition == definition }
+  end
 end
 
 class Card
@@ -29,6 +30,3 @@ class Card
   end
 
 end
-
-a = Deck.new
-a.import
