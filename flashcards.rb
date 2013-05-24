@@ -9,15 +9,9 @@ class Deck
   end
 
   def import
-    @lines = []
     File.new("flashcard_samples.txt").each_slice(3) do |slice| 
-      @lines << slice.map! {|element| element.chomp}
-    end
-    puts @lines.inspect
-end
-flashcards = []
-import
-@lines.each {|arr| flashcards << Card.new({:defintion => arr[0], :answer => arr[1]})}
+      arr = (slice.map! {|element| element.chomp})
+      @cards << Card.new({:defintion => arr[0], :answer => arr[1]})
   end
 
   def check_guess(guess)
