@@ -36,7 +36,7 @@ class Game
 
   def initialize
     greeting
-    @deck = Deck.new
+    @deck = Deck.new(ARGV[0])
     @exit = false
   end
 
@@ -61,7 +61,7 @@ class Game
   end
 
   def get_guess
-    @guess = gets.chomp
+    @guess = STDIN.gets.chomp
     exit if @guess == "exit" 
   end
 
